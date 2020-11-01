@@ -1,0 +1,32 @@
+.Post {
+  background: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 9px 7px #36181833;
+  padding: .5rem;
+  position: relative;
+  padding-top: rem(2px);
+  width: calc(100% - 16px);
+  max-width: 560px;
+  margin-bottom: 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+  padding-top: 16px;
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+  margin: 0 0 16 0Apx;
+
+
+  .Post__title {
+    font-size: 36px;
+    font-weight: 400;
+  }
+  .Post__author {
+    font-size: 20px;
+  }
+
+}

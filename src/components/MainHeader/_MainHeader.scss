@@ -1,0 +1,18 @@
+@import '../../scss/_color-palette';
+
+.MainHeader {
+  height: 60px;
+  background-color: $blue;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;justify-content: flex-start;
+
+  .MainHeader__inner {
+    margin-left: 38px;
+    max-width: 1130px;
+    color: #ffff;
+    font-size: 36px;
+  }
+}

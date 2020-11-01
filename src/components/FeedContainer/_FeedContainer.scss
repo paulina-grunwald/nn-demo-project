@@ -1,0 +1,17 @@
+.FeedContainer {
+  margin-top: 60px;
+  max-width: 600px;
+  padding: .5rem;
+  margin: .6rem;
+  background-color: white;
+  margin-left: 0;
+  margin-right: 0;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+
+  .FeedContainer__posts {
+    margin-top: 30px;
+  }
+
+}
