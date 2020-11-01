@@ -1,5 +1,5 @@
-import React from 'react';
-import './_MainHeader.scss';
+import React from 'react'
+import './_MainHeader.scss'
 
 class MainHeader extends React.Component {
     render() {
@@ -7,8 +7,8 @@ class MainHeader extends React.Component {
             <header className="MainHeader">
                 <div className="MainHeader__inner">#WaterCooler</div>
             </header>
-        );
+        )
     }
 }
 
-export default MainHeader;
+export default MainHeader

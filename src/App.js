@@ -1,7 +1,7 @@
-import React from 'react';
-import MainHeader from './components/MainHeader/MainHeader';
-import FeedContainer from './components/FeedContainer/FeedContainer';
-import './App.scss';
+import React from 'react'
+import MainHeader from './components/MainHeader/MainHeader'
+import FeedContainer from './components/FeedContainer/FeedContainer'
+import './App.scss'
 
 function App() {
     return (
@@ -12,7 +12,7 @@ function App() {
                 <FeedContainer />
             </div>
         </div>
-    );
+    )
 }
 
-export default App;
+export default App

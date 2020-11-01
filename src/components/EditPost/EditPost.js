@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class EditPost extends Component {
     render() {
@@ -6,8 +6,8 @@ class EditPost extends Component {
             <div>
                 <button>Edit</button>
             </div>
-        );
+        )
     }
 }
 
-export default EditPost;
+export default EditPost

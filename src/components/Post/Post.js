@@ -1,8 +1,8 @@
-import React from 'react';
-import DeletePost from '../DeletePost/DeletePost';
-import PropTypes from 'prop-types';
-import './_Post.scss';
-import EditPost from '../EditPost/EditPost';
+import React from 'react'
+import DeletePost from '../DeletePost/DeletePost'
+import PropTypes from 'prop-types'
+import './_Post.scss'
+import EditPost from '../EditPost/EditPost'
 
 export default function Post({ post }) {
     return (
@@ -19,9 +19,9 @@ export default function Post({ post }) {
                 <EditPost />
             </span>
         </div>
-    );
+    )
 }
 
 Post.propTypes = {
     post: PropTypes.object,
-};
+}
