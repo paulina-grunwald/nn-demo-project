@@ -6,6 +6,7 @@ frontend:
         - npm install
     build:
       commands:
+        - amplifyPush --simple
         - npm run build
   artifacts:
     baseDirectory: app
