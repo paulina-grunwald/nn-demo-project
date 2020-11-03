@@ -8,13 +8,27 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 20,
+              "apiKeyExpirationDays": 7,
               "description": ""
             }
           },
           "additionalAuthenticationProviders": []
         }
       }
+    }
+  },
+  "auth": {
+    "nndemoprojected619a86": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "nndemoapp": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

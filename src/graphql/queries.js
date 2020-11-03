@@ -32,6 +32,7 @@ export const getPost = /* GraphQL */ `
         }
         nextToken
       }
+      image
       updatedAt
     }
   }
@@ -56,6 +57,7 @@ export const listPosts = /* GraphQL */ `
         likes {
           nextToken
         }
+        image
         updatedAt
       }
       nextToken
@@ -81,10 +83,22 @@ export const getComment = /* GraphQL */ `
         likes {
           nextToken
         }
+        image
         updatedAt
       }
       content
       createdAt
+      likes {
+        items {
+          id
+          numberLikes
+          likeOwnerId
+          likeOwnerUsername
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       updatedAt
     }
   }
@@ -107,10 +121,14 @@ export const listComments = /* GraphQL */ `
           postTitle
           postBody
           createdAt
+          image
           updatedAt
         }
         content
         createdAt
+        likes {
+          nextToken
+        }
         updatedAt
       }
       nextToken
@@ -137,6 +155,7 @@ export const getLike = /* GraphQL */ `
         likes {
           nextToken
         }
+        image
         updatedAt
       }
       createdAt
@@ -162,6 +181,67 @@ export const listLikes = /* GraphQL */ `
           postOwnerUsername
           postTitle
           postBody
+          createdAt
+          image
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getCommentLike = /* GraphQL */ `
+  query GetCommentLike($id: ID!) {
+    getCommentLike(id: $id) {
+      id
+      numberLikes
+      likeOwnerId
+      likeOwnerUsername
+      post {
+        id
+        commentOwnerId
+        commentOwnerUsername
+        post {
+          id
+          postOwnerId
+          postOwnerUsername
+          postTitle
+          postBody
+          createdAt
+          image
+          updatedAt
+        }
+        content
+        createdAt
+        likes {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCommentLikes = /* GraphQL */ `
+  query ListCommentLikes(
+    $filter: ModelCommentLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCommentLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        numberLikes
+        likeOwnerId
+        likeOwnerUsername
+        post {
+          id
+          commentOwnerId
+          commentOwnerUsername
+          content
           createdAt
           updatedAt
         }

@@ -10,6 +10,11 @@
       "StackName": "amplify-nndemoproject-dev-171529",
       "StackId": "arn:aws:cloudformation:us-east-2:769472131725:stack/amplify-nndemoproject-dev-171529/77da8d00-1c5d-11eb-858c-0a7cd1635ec6",
       "AmplifyAppId": "dbd1e7nlv4qva"
+    },
+    "categories": {
+      "auth": {
+        "nndemoprojected619a86": {}
+      }
     }
   }
 }

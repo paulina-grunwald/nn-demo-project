@@ -4,18 +4,25 @@ type Post @model {
 	postOwnerUsername: String!
 	postTitle: String!
 	postBody: String!
-	createdAt: String
+	createdAt: AWSDateTime!
 	comments: [Comment] @connection(name: "PostComments") #relationship
 	likes: [Like] @connection(name: "PostLikes")
+  photo: String
 }
 
+# type Photo @model {
+#   id: ID!
+#   owner: String
+#   file: S3Object
+# }
 type Comment @model {
 	id: ID!
 	commentOwnerId: String!
 	commentOwnerUsername: String!
 	post: Post @connection(name: "PostComments")
 	content: String!
-	createdAt: String!
+	createdAt: AWSDateTime!
+  likes: [CommentLike] @connection(name: "CommentLikes")
 }
 
 type Like @model {
@@ -24,4 +31,17 @@ type Like @model {
 	likeOwnerId: String!
 	likeOwnerUsername: String!
 	post: Post @connection(name: "PostLikes")
+}
+
+type CommentLike @model {
+	id: ID!
+	numberLikes: Int!
+	likeOwnerId: String!
+	likeOwnerUsername: String!
+	post: Comment @connection(name: "CommentLikes")
+}
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
 }

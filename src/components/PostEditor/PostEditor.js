@@ -2,29 +2,47 @@ import React, { Component } from 'react'
 import { API, graphqlOperation } from 'aws-amplify'
 import { createPost } from '../../graphql/mutations'
 import './_PostEditor.scss'
+import PropTypes from 'prop-types'
+
 class PostEditor extends Component {
     state = {
-        postOwnerId: 'a2e2',
-        postOwnerUsername: 'alex',
+        postOwnerId: '',
+        postOwnerUsername: '',
         postTitle: '',
         postBody: '',
+        photo: '',
     }
 
-    componentDidMount = async () => {}
+    componentDidMount = async () => {
+        const { username, userId } = this.props
+        this.setState({
+            postOwnerId: userId,
+            postOwnerUsername: username,
+        })
+    }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.username !== this.props.username || prevProps.userId !== this.props.userId) {
+            const { userId, username } = this.props
+            this.setState({
+                postOwnerId: userId,
+                postOwnerUsername: username,
+            })
+        }
+    }
     handleChangePost = (event) =>
         this.setState({
             [event.target.name]: event.target.value,
         })
 
-    handleAddPost = async () => {
-        const { postOwnerId, postOwnerUsername, postTitle, postBody } = this.state
+    handleAddPost = async (event) => {
         event.preventDefault()
+
         const input = {
-            postOwnerId,
-            postOwnerUsername,
-            postTitle,
-            postBody,
+            postOwnerId: this.state.postOwnerId,
+            postOwnerUsername: this.state.postOwnerUsername,
+            postTitle: this.state.postTitle,
+            postBody: this.state.postBody,
             createdAt: new Date().toISOString(),
         }
 
@@ -32,7 +50,6 @@ class PostEditor extends Component {
 
         this.setState({ postTitle: '', postBody: '' })
     }
-
     render() {
         const { postTitle, postBody } = this.state
         return (
@@ -57,10 +74,16 @@ class PostEditor extends Component {
                     value={postBody}
                     onChange={this.handleChangePost}
                 />
-                <input id="submit-button" type="submit" className="PostEditor__button" />
+                <button id="submit-button" type="submit" className="PostEditor__button">
+                    Post
+                </button>
             </form>
         )
     }
 }
 
 export default PostEditor
+PostEditor.propTypes = {
+    userId: PropTypes.string,
+    username: PropTypes.string,
+}

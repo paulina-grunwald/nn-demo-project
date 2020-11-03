@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { listPosts } from '../../graphql/queries'
-import { API, graphqlOperation } from 'aws-amplify'
 import Post from '../Post/Post'
 import PropTypes from 'prop-types'
 export default class Posts extends Component {
@@ -8,19 +6,19 @@ export default class Posts extends Component {
         posts: [],
     }
 
-    componentDidMount = async () => {
-        this.getPosts()
+    componentDidUpdate(prevProps) {
+        const { posts } = this.props
+        if (prevProps.posts !== posts) {
+            this.setState({
+                posts: posts,
+            })
+        }
     }
 
-    getPosts = async () => {
-        const result = await API.graphql(graphqlOperation(listPosts))
-        this.setState({ posts: result.data.listPosts.items })
-        console.log('All Posts: ', result.data.listPosts.items)
-    }
     render() {
-        const { posts } = this.state
+        const { posts } = this.props
         return posts.map((post) => {
-            return <Post post={post} key={post} />
+            return <Post post={post} key={post.postId} />
         })
     }
 }

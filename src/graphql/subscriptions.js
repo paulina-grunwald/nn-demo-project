@@ -32,6 +32,7 @@ export const onCreatePost = /* GraphQL */ `
         }
         nextToken
       }
+      image
       updatedAt
     }
   }
@@ -67,6 +68,7 @@ export const onUpdatePost = /* GraphQL */ `
         }
         nextToken
       }
+      image
       updatedAt
     }
   }
@@ -102,6 +104,7 @@ export const onDeletePost = /* GraphQL */ `
         }
         nextToken
       }
+      image
       updatedAt
     }
   }
@@ -125,10 +128,22 @@ export const onCreateComment = /* GraphQL */ `
         likes {
           nextToken
         }
+        image
         updatedAt
       }
       content
       createdAt
+      likes {
+        items {
+          id
+          numberLikes
+          likeOwnerId
+          likeOwnerUsername
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       updatedAt
     }
   }
@@ -152,10 +167,22 @@ export const onUpdateComment = /* GraphQL */ `
         likes {
           nextToken
         }
+        image
         updatedAt
       }
       content
       createdAt
+      likes {
+        items {
+          id
+          numberLikes
+          likeOwnerId
+          likeOwnerUsername
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       updatedAt
     }
   }
@@ -179,10 +206,22 @@ export const onDeleteComment = /* GraphQL */ `
         likes {
           nextToken
         }
+        image
         updatedAt
       }
       content
       createdAt
+      likes {
+        items {
+          id
+          numberLikes
+          likeOwnerId
+          likeOwnerUsername
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       updatedAt
     }
   }
@@ -207,6 +246,7 @@ export const onCreateLike = /* GraphQL */ `
         likes {
           nextToken
         }
+        image
         updatedAt
       }
       createdAt
@@ -234,6 +274,7 @@ export const onUpdateLike = /* GraphQL */ `
         likes {
           nextToken
         }
+        image
         updatedAt
       }
       createdAt
@@ -258,6 +299,106 @@ export const onDeleteLike = /* GraphQL */ `
         comments {
           nextToken
         }
+        likes {
+          nextToken
+        }
+        image
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCommentLike = /* GraphQL */ `
+  subscription OnCreateCommentLike {
+    onCreateCommentLike {
+      id
+      numberLikes
+      likeOwnerId
+      likeOwnerUsername
+      post {
+        id
+        commentOwnerId
+        commentOwnerUsername
+        post {
+          id
+          postOwnerId
+          postOwnerUsername
+          postTitle
+          postBody
+          createdAt
+          image
+          updatedAt
+        }
+        content
+        createdAt
+        likes {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCommentLike = /* GraphQL */ `
+  subscription OnUpdateCommentLike {
+    onUpdateCommentLike {
+      id
+      numberLikes
+      likeOwnerId
+      likeOwnerUsername
+      post {
+        id
+        commentOwnerId
+        commentOwnerUsername
+        post {
+          id
+          postOwnerId
+          postOwnerUsername
+          postTitle
+          postBody
+          createdAt
+          image
+          updatedAt
+        }
+        content
+        createdAt
+        likes {
+          nextToken
+        }
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCommentLike = /* GraphQL */ `
+  subscription OnDeleteCommentLike {
+    onDeleteCommentLike {
+      id
+      numberLikes
+      likeOwnerId
+      likeOwnerUsername
+      post {
+        id
+        commentOwnerId
+        commentOwnerUsername
+        post {
+          id
+          postOwnerId
+          postOwnerUsername
+          postTitle
+          postBody
+          createdAt
+          image
+          updatedAt
+        }
+        content
+        createdAt
         likes {
           nextToken
         }

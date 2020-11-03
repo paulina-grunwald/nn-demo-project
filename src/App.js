@@ -1,4 +1,6 @@
 import React from 'react'
+import { withAuthenticator } from 'aws-amplify-react'
+import '@aws-amplify/ui/dist/style.css'
 import MainHeader from './components/MainHeader/MainHeader'
 import FeedContainer from './components/FeedContainer/FeedContainer'
 import './App.scss'
@@ -15,4 +17,4 @@ function App() {
     )
 }
 
-export default App
+export default withAuthenticator(App)
