@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Auth, API, graphqlOperation } from 'aws-amplify'
 import { createComment } from '../../graphql/mutations'
-import './_CommentEditor.scss'
+import '../../scss/components/_CommentEditor.scss'
 
 import PropTypes from 'prop-types'
 export default class CommentEditor extends Component {

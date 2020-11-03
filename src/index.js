@@ -5,8 +5,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import Amplify from 'aws-amplify'
 import aws_exports from './aws-exports'
-import './scss/_reset.scss'
-import './scss/_color-palette.scss'
+import './scss/global/_reset.scss'
 
 Amplify.configure(aws_exports)
 ReactDOM.render(

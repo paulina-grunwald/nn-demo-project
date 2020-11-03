@@ -3,7 +3,7 @@ import { withAuthenticator } from 'aws-amplify-react'
 import '@aws-amplify/ui/dist/style.css'
 import MainHeader from './components/MainHeader/MainHeader'
 import FeedContainer from './components/FeedContainer/FeedContainer'
-import './App.scss'
+import './scss/components/App.scss'
 
 function App() {
     return (

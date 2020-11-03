@@ -1,6 +1,6 @@
 import React from 'react'
 import SignOut from '../Auth/SignOut'
-import './_MainHeader.scss'
+import '../../scss/components/_MainHeader.scss'
 
 class MainHeader extends React.Component {
     render() {

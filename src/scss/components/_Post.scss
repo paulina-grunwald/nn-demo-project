@@ -1,4 +1,4 @@
-@import '../../scss/color-palette';
+@import '../../scss/global/color-palette';
 
 .Post {
   background: $white;
@@ -20,7 +20,11 @@
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,.08);
-  margin: 0 0 16 0Apx;
+  margin: 0 0 16 0px;
+
+  .anticon  {
+    font-size: 20px;
+  }
 
   .Post__avatar {
     background-image: url('../../images/avatar_blank@2x.png');
