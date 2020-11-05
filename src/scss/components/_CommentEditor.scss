@@ -1,7 +1,12 @@
 @import '../../scss/global/color-palette';
 .CommentEditor {
-  margin-top: 16px;
-  max-width: 100%;
+  margin-top: 0px;
+  padding: 16px;
+  max-width: 560px;
+  background-color: $subtle-grey;
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 
   .CommentEditor__form {
     background-color: $white;
@@ -9,6 +14,11 @@
     border: 1px solid $light-grey;
     border-radius: 8px;
     font-size: 14px;
+
+    input {
+      width: 100%;
+      overflow: hidden;
+    }
   }
   .CommentEditor__buton {
     margin-top: 20px;
