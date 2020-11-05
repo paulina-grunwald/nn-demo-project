@@ -1,0 +1,127 @@
+@import '../../scss/global/color-palette';
+@import '../../scss/global/scheleton_animations';
+
+.PostScheleton {
+  margin-top: 16px;
+  background: $white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 9px 7px #36181833;
+  position: relative;
+  padding-top: rem(2px);
+  width: calc(100% - 16px);
+  max-width: 560px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  padding-top: 16px;
+  width: 100%;
+  max-width: 560px;
+  background: $white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+  .PostScheleton__header {
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .anticon  {
+      color: $light-grey;
+      font-size: 20px;
+    }
+  }
+  .PostScheleton__header-userinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .PostScheleton__header-avatar {
+
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+    background-color: $light-grey;
+    border-radius: 50%;
+
+    background-color: $animation-base-color;
+
+    background-image:
+    radial-gradient(
+      circle 200px,
+      $animation-base-color,
+      $animation-shine-color
+    );
+    background-size: 100px;
+    -webkit-animation: ScheletonGradient $animation-duration ease infinite;
+    -moz-animation: ScheletonGradient $animation-duration ease infinite;
+    animation: ScheletonGradient $animation-duration ease infinite;
+    border-radius: 50%;
+  }
+
+  .PostScheleton_animated-line {
+    background-color: $animation-base-color;
+    background-image:
+    linear-gradient(
+      90deg,
+      rgba($animation-shine-color, 0) 0,
+      rgba($animation-shine-color, .8) 50%,
+      rgba($animation-shine-color, 0) 100%
+    );
+    background-size: 400px;
+    border-radius: 8px;
+    height: 15px;
+    //width: 200px;
+    -webkit-animation: ScheletonGradient $animation-duration ease infinite;
+    -moz-animation: ScheletonGradient $animation-duration ease infinite;
+    animation: ScheletonGradient $animation-duration ease infinite;
+  }
+
+  .PostScheleton_animated-line--profile {
+    width: 220px;
+    margin-bottom: 8px;
+  }
+  .PostScheleton_animated-line--datetime {
+    width: 150px;
+    height: 8px;
+  }
+
+  .PostScheleton_animated-line--body-long {
+    margin-top: 10px;
+    width: 270px;
+    height: 8px;
+  }
+
+  .PostScheleton_animated-line--body-short {
+    margin-top: 10px;
+    width: 190px;
+    height: 8px;
+  }
+
+  .PostScheleton_animated-line--body-medium {
+    margin-top: 10px;
+    width: 220px;
+    height: 8px;
+  }
+
+
+  .PostScheleton__title {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .PostScheleton__author {
+    text-align: end;
+    background-color: $light-grey;
+    font-size: 14px;
+    padding: 8px 8px 8px 8px;
+    border-radius: 8px;
+    width: fit-content;
+
+
+  }
+  .PostScheleton__body {
+  padding: 20px 0px 20px 0px;
+  }
+
+}

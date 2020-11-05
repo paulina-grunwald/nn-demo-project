@@ -11,7 +11,7 @@ import { API, graphqlOperation, Auth } from 'aws-amplify'
 import '../../scss/components/_FeedContainer.scss'
 import Posts from '../Posts/Posts'
 import PostEditor from '../PostEditor/PostEditor'
-import PostScheleton from '../PostScheleton/PostScheleton'
+import PostScheleton from '../Scheletons/PostScheleton'
 import UserContext from '../UserContext'
 export default class FeedContainer extends Component {
     constructor() {

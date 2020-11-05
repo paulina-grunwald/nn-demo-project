@@ -16,11 +16,7 @@ export default class Comments extends Component {
                     aria-hidden>
                     Edit
                 </div>
-                <div
-                    tabIndex={-1}
-                    // onClick={() => this.handleDeletePost(post.id)}
-                    role="button"
-                    defaultValue>
+                <div tabIndex={-1} role="button" defaultValue>
                     Delete
                 </div>
             </div>

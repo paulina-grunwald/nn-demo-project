@@ -11,12 +11,15 @@
     justify-content: space-between;
     margin-left: 60px;
     margin-right: 60px;
+    align-items: center;
     height: 100%;
     color: $white;
 
     .MainHeader__inner-logo {
       max-width: 1130px;
       font-size: 36px;
+      color: $white;
+
     }
 
     button {
