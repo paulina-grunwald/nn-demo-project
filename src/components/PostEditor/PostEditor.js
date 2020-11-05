@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { API, graphqlOperation } from 'aws-amplify'
-import { createPost } from '../../graphql/mutations'
-import './_PostEditor.scss'
 import PropTypes from 'prop-types'
+import { createPost } from '../../graphql/mutations'
+import '../../scss/components/_PostEditor.scss'
 
 class PostEditor extends Component {
     state = {

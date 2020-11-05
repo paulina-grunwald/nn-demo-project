@@ -1,0 +1,26 @@
+$animation-base-color: rgba($light-grey, 0.5);
+$animation-shine-color: $white;
+$animation-duration: 1.6s;
+$animation-background-size: 500px;
+
+// animations
+@keyframes ScheletonGradient {
+  0% {
+    background-position: -100px;
+  }
+  40% {
+    background-position: 200px;
+  }
+  100% {
+    background-position: 240px;
+  }
+}
+
+// mixins
+@mixin nth-children($points...) {
+  @each $point in $points {
+    &:nth-child(#{$point}) {
+      @content;
+    }
+  }
+}

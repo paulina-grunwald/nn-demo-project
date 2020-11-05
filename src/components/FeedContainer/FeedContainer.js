@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import { listPosts } from '../../graphql/queries'
-import { onCreatePost, onDeletePost, onCreateComment } from '../../graphql/subscriptions'
+import {
+    onCreatePost,
+    onDeletePost,
+    onUpdatePost,
+    onCreateComment,
+    // onCreateLike,
+} from '../../graphql/subscriptions'
 import { API, graphqlOperation, Auth } from 'aws-amplify'
-import './_FeedContainer.scss'
+import '../../scss/components/_FeedContainer.scss'
 import Posts from '../Posts/Posts'
 import PostEditor from '../PostEditor/PostEditor'
-import PostScheleton from '../PostScheleton/PostScheleton'
-
+import PostScheleton from '../Scheletons/PostScheleton'
+import UserContext from '../UserContext'
 export default class FeedContainer extends Component {
     constructor() {
         super()
@@ -50,6 +56,21 @@ export default class FeedContainer extends Component {
             },
         })
 
+        this.updatePostListener = API.graphql(graphqlOperation(onUpdatePost)).subscribe({
+            next: (postData) => {
+                const { posts } = this.state
+                const updatePost = postData.value.data.onUpdatePost
+                const index = posts.findIndex((post) => post.id === updatePost.id) //had forgotten to say updatePost.id!
+                const updatePosts = [
+                    ...posts.slice(0, index),
+                    updatePost,
+                    ...posts.slice(index + 1),
+                ]
+
+                this.setState({ posts: updatePosts })
+            },
+        })
+
         this.createPostCommentListener = API.graphql(graphqlOperation(onCreateComment)).subscribe({
             next: (commentData) => {
                 const createdComment = commentData.value.data.onCreateComment
@@ -78,34 +99,37 @@ export default class FeedContainer extends Component {
     componentWillUnmount() {
         this.createPostListener.unsubscribe()
         this.deletePostListener.unsubscribe()
+        this.updatePostListener.unsubscribe()
         this.createPostCommentListener.unsubscribe()
     }
 
     render() {
         const { isFetching, posts, username, userId } = this.state
         return (
-            <div className="FeedContainer">
-                <PostEditor username={username} userId={userId} />
-                {isFetching ? (
-                    <div>
-                        <PostScheleton key="1" />
-                        <PostScheleton key="2" />
-                        <PostScheleton key="3" />
-                        <PostScheleton key="4" />
-                        <PostScheleton key="5" />
-                        <PostScheleton key="6" />
-                        <PostScheleton key="7" />
-                    </div>
-                ) : posts.length === 0 && !isFetching ? (
-                    <p className="FeedContainer__noposts">
-                        {'There are no posts that fit the current filters.'}
-                    </p>
-                ) : (
-                    <div className="FeedContainer__posts">
-                        <Posts posts={posts} />
-                    </div>
-                )}
-            </div>
+            <UserContext.Provider value={this.state}>
+                <div className="FeedContainer">
+                    <PostEditor username={username} userId={userId} />
+                    {isFetching ? (
+                        <div>
+                            <PostScheleton key="1" />
+                            <PostScheleton key="2" />
+                            <PostScheleton key="3" />
+                            <PostScheleton key="4" />
+                            <PostScheleton key="5" />
+                            <PostScheleton key="6" />
+                            <PostScheleton key="7" />
+                        </div>
+                    ) : posts.length === 0 && !isFetching ? (
+                        <p className="FeedContainer__noposts">
+                            {'There are no posts that fit the current filters.'}
+                        </p>
+                    ) : (
+                        <div className="FeedContainer__posts">
+                            <Posts />
+                        </div>
+                    )}
+                </div>
+            </UserContext.Provider>
         )
     }
 }

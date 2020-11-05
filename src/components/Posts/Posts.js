@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Post from '../Post/Post'
 import PropTypes from 'prop-types'
+import UserContext from '../UserContext'
 export default class Posts extends Component {
     state = {
         posts: [],
@@ -16,10 +17,22 @@ export default class Posts extends Component {
     }
 
     render() {
-        const { posts } = this.props
-        return posts.map((post) => {
-            return <Post post={post} key={post.postId} />
-        })
+        return (
+            <UserContext.Consumer>
+                {({ username, posts }) => {
+                    return posts.map((post, index) => {
+                        return (
+                            <Post
+                                post={post}
+                                key={index}
+                                // userId={userId}
+                                username={username}
+                            />
+                        )
+                    })
+                }}
+            </UserContext.Consumer>
+        )
     }
 }
 
