@@ -1,23 +1,26 @@
 import React from 'react'
-import DeletePost from '../DeletePost/DeletePost'
 import PropTypes from 'prop-types'
-import './_Post.scss'
+import CommentEditor from '../CommentEditor/CommentEditor'
+import DeletePost from '../DeletePost/DeletePost'
 import EditPost from '../EditPost/EditPost'
+import './_Post.scss'
 
 export default function Post({ post }) {
     return (
         <div className="Post" key={post.id}>
+            <div className="Post__avatar"></div>
             <div className="Post__title">{post.postTitle}</div>
             <span className="Post__author">
                 {'Posted by: '}
                 {post.postOwnerUsername} {'at'}
                 <time> {new Date(post.createdAt).toDateString()}</time>
             </span>
-            <p>{post.postBody}</p>
+            <div className="Post__body">{post.postBody}</div>
             <span>
                 <DeletePost post={post} />
                 <EditPost />
             </span>
+            <CommentEditor postId={post.id} />
         </div>
     )
 }
