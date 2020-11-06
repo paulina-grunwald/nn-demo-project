@@ -64,7 +64,6 @@ export const listPosts = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
         updatedAt
       }
       nextToken
@@ -90,7 +89,7 @@ export const getComment = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+
         updatedAt
       }
       content
@@ -128,7 +127,6 @@ export const listComments = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
           updatedAt
         }
         content
@@ -162,7 +160,6 @@ export const getLike = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
         updatedAt
       }
       createdAt
@@ -189,7 +186,6 @@ export const listLikes = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
           updatedAt
         }
         createdAt
@@ -217,7 +213,6 @@ export const getCommentLike = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
           updatedAt
         }
         content
