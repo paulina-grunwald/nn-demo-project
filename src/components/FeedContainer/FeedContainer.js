@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { listPosts } from '../../graphql/queries'
 import {
     onCreatePost,
     onDeletePost,
     onUpdatePost,
+    onUpdateComment,
     onCreateComment,
     // onCreateLike,
 } from '../../graphql/subscriptions'
+import * as queries from '../../graphql/queries'
 import { API, graphqlOperation, Auth } from 'aws-amplify'
 import '../../scss/components/_FeedContainer.scss'
 import Posts from '../Posts/Posts'
@@ -60,7 +61,7 @@ export default class FeedContainer extends Component {
             next: (postData) => {
                 const { posts } = this.state
                 const updatePost = postData.value.data.onUpdatePost
-                const index = posts.findIndex((post) => post.id === updatePost.id) //had forgotten to say updatePost.id!
+                const index = posts.findIndex((post) => post.id === updatePost.id)
                 const updatePosts = [
                     ...posts.slice(0, index),
                     updatePost,
@@ -84,16 +85,34 @@ export default class FeedContainer extends Component {
                 this.setState({ posts })
             },
         })
+
+        this.updatePostCommentListener = API.graphql(graphqlOperation(onUpdateComment)).subscribe({
+            next: (commentData) => {
+                const updatedComment = commentData.value.data.onUpdateComment
+                const updatedCommentPostId = updatedComment.post.id
+                let posts = [...this.state.posts]
+                for (let post of posts) {
+                    if (updatedCommentPostId === post.id) {
+                        post.comments.items.map((comment) => {
+                            if (comment.id === updatedComment.id) {
+                                comment.content = updatedComment.content
+                            } else {
+                                return comment
+                            }
+                        })
+                    }
+                }
+                this.setState({ posts })
+            },
+        })
     }
 
     getPosts = async () => {
-        const result = await API.graphql(graphqlOperation(listPosts))
-
-        const sorted = result.data.listPosts.items.sort(function (a, b) {
-            return a.date < b.date ? -1 : a.date > b.date ? 1 : 0
+        const result = await API.graphql({
+            query: queries.listPosts,
         })
 
-        this.setState({ posts: sorted })
+        this.setState({ posts: result.data.listPosts.items.reverse() })
     }
 
     componentWillUnmount() {
@@ -101,6 +120,7 @@ export default class FeedContainer extends Component {
         this.deletePostListener.unsubscribe()
         this.updatePostListener.unsubscribe()
         this.createPostCommentListener.unsubscribe()
+        this.updatePostCommentListener.unsubscribe()
     }
 
     render() {

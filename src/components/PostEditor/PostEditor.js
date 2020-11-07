@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { API, graphqlOperation } from 'aws-amplify'
+import { API } from 'aws-amplify'
 import PropTypes from 'prop-types'
 import { createPost } from '../../graphql/mutations'
 import '../../scss/components/_PostEditor.scss'
@@ -38,15 +38,17 @@ class PostEditor extends Component {
     handleAddPost = async (event) => {
         event.preventDefault()
 
-        const input = {
+        const postDetails = {
             postOwnerId: this.state.postOwnerId,
             postOwnerUsername: this.state.postOwnerUsername,
             postTitle: this.state.postTitle,
             postBody: this.state.postBody,
-            createdAt: new Date().toISOString(),
         }
 
-        await API.graphql(graphqlOperation(createPost, { input }))
+        await API.graphql({
+            query: createPost,
+            variables: { input: postDetails },
+        })
 
         this.setState({ postTitle: '', postBody: '' })
     }

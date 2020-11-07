@@ -23,7 +23,6 @@ export default class CommentEditor extends Component {
             commentOwnerId: userId,
             commentOwnerUsername: username,
             content: content,
-            createdAt: new Date().toISOString(),
         }
 
         await API.graphql(graphqlOperation(createComment, { input }))

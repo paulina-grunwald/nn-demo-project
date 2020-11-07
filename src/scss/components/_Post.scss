@@ -25,7 +25,15 @@
     flex-direction: row;
     justify-content: space-between;
     .anticon  {
+      font-weight: 700;
       font-size: 20px;
+      color: $light-grey;
+      cursor: pointer;
+      transition: all 125ms ease;
+
+      :hover {
+        color: $blue
+      }
     }
   }
   .Post__wrapper {
@@ -65,4 +73,73 @@
   .Post__body {
   padding: 20px 0px 20px 0px;
   }
+  .anticon-heart {
+    font-size: 20px;
+    color: $light-grey;
+    :hover {
+      color: $red;
+    }
+  }
+
+  .Post__editor {
+      display: flex;
+      flex-direction: column;
+      font-size: 18px;
+      margin-top: 30px;
+      padding: 0px 16px 0px 16px;
+
+
+      .Post__editor-title {
+        height: 40px;
+        padding: 12px 16px;
+        font-size: 16px;
+        border-radius: 8px;
+        border-color: #e2e5ec;
+        box-shadow: 0 2px 4px rgba(0,0,0,.08);
+        cursor: text;
+        transition: all 5s ease-out;
+        margin-bottom: 8px;
+      }
+
+      .Post__editor-body {
+        font-size: 16px;
+        border-color: #e2e5ec;
+        padding: 12px 16px;
+        user-select: text;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        height: 100px;
+        box-shadow: 0 2px 4px rgba(0,0,0,.08);
+      }
+
+      .Post__editor-buttons {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        font-size: 14px;
+        
+        .Post__editor-save {
+          cursor: pointer;
+          width: 80px;
+          font-weight: 700;
+
+          text-transform: uppercase;
+          background-color:$blue;
+          color: $white;
+          border-radius: 8px;
+
+        }
+        .Post__editor-cancel {
+          cursor: pointer;
+          font-weight: 700;
+          margin-left: 15px;
+          color: $blue;
+          text-transform: uppercase;
+
+
+        }
+      }
+    }
+
 }
