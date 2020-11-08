@@ -1,6 +1,6 @@
 {
   "api": {
-    "nndemoproject": {
+    "watercoolerdemo": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -18,17 +18,11 @@
     }
   },
   "auth": {
-    "nndemoprojected619a86": {
+    "watercoolerdemobe99a363": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false
-    }
-  },
-  "storage": {
-    "nndemoapp": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
     }
   }
 }

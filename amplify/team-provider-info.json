@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-nndemoproject-dev-171529-authRole",
-      "UnauthRoleArn": "arn:aws:iam::769472131725:role/amplify-nndemoproject-dev-171529-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::769472131725:role/amplify-nndemoproject-dev-171529-authRole",
+      "AuthRoleName": "amplify-watercoolerdemo-dev-165933-authRole",
+      "UnauthRoleArn": "arn:aws:iam::769472131725:role/amplify-watercoolerdemo-dev-165933-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::769472131725:role/amplify-watercoolerdemo-dev-165933-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-nndemoproject-dev-171529-deployment",
-      "UnauthRoleName": "amplify-nndemoproject-dev-171529-unauthRole",
-      "StackName": "amplify-nndemoproject-dev-171529",
-      "StackId": "arn:aws:cloudformation:us-east-2:769472131725:stack/amplify-nndemoproject-dev-171529/77da8d00-1c5d-11eb-858c-0a7cd1635ec6",
-      "AmplifyAppId": "dbd1e7nlv4qva"
+      "DeploymentBucketName": "amplify-watercoolerdemo-dev-165933-deployment",
+      "UnauthRoleName": "amplify-watercoolerdemo-dev-165933-unauthRole",
+      "StackName": "amplify-watercoolerdemo-dev-165933",
+      "StackId": "arn:aws:cloudformation:us-east-2:769472131725:stack/amplify-watercoolerdemo-dev-165933/66e30300-21db-11eb-a36e-0611fd7a7fc8",
+      "AmplifyAppId": "d2j8n4rr60h275"
     },
     "categories": {
       "auth": {
-        "nndemoprojected619a86": {}
+        "watercoolerdemobe99a363": {}
       }
     }
   }
