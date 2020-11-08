@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import UserContext from '../UserContext'
 import { Popover } from 'antd'
 import { EllipsisOutlined } from '@ant-design/icons'
-import { updateComment } from '../../graphql/mutations'
+import { updateComment, deleteComment } from '../../graphql/mutations'
 import { API, graphqlOperation } from 'aws-amplify'
 import '../../scss/components/_Comment.scss'
 export default class Comment extends Component {
@@ -58,6 +58,14 @@ export default class Comment extends Component {
         this.setState({ isEditing: false })
     }
 
+    handleDeletComment = async (commentId) => {
+        const input = {
+            id: commentId,
+        }
+
+        await API.graphql(graphqlOperation(deleteComment, { input }))
+    }
+
     render() {
         const { comment } = this.props
         const { isEditing } = this.state
@@ -71,7 +79,12 @@ export default class Comment extends Component {
                     aria-hidden>
                     Edit
                 </div>
-                <div tabIndex={-1} role="button" defaultValue>
+                <div
+                    tabIndex={-1}
+                    role="button"
+                    defaultValue
+                    aria-hidden
+                    onClick={() => this.handleDeletComment(comment.id)}>
                     Delete
                 </div>
             </div>

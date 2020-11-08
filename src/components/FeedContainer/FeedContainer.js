@@ -5,7 +5,9 @@ import {
     onUpdatePost,
     onUpdateComment,
     onCreateComment,
-    // onCreateLike,
+    onDeleteComment,
+    onCreateLike,
+    onDeleteLike,
 } from '../../graphql/subscriptions'
 import * as queries from '../../graphql/queries'
 import { API, graphqlOperation, Auth } from 'aws-amplify'
@@ -43,9 +45,7 @@ export default class FeedContainer extends Component {
             next: (postData) => {
                 const newPost = postData.value.data.onCreatePost
                 const prevPosts = this.state.posts.filter((post) => post.id !== newPost.id)
-
                 const updatedPosts = [newPost, ...prevPosts]
-
                 this.setState({ posts: updatedPosts })
             },
         })
@@ -105,14 +105,49 @@ export default class FeedContainer extends Component {
                 this.setState({ posts })
             },
         })
+
+        this.deletePostCommentListener = API.graphql(graphqlOperation(onDeleteComment)).subscribe({
+            next: (postData) => {
+                const deletedComment = postData.value.data.onDeleteComment
+                const posts = [...this.state.posts]
+                const updatedPosts = posts.map((post) => {
+                    const comments = post.comments.items
+                    const updatedComments = comments.filter((comment) => {
+                        comment.id !== deletedComment.id
+                    })
+                    post.comments.items = updatedComments
+                    return post
+                })
+                this.setState({ posts: updatedPosts })
+            },
+        })
+
+        this.createPostLikeListener = API.graphql(graphqlOperation(onCreateLike)).subscribe({
+            next: (postData) => {
+                const createdLike = postData.value.data.onCreateLike
+                let posts = [...this.state.posts]
+                for (let post of posts) {
+                    if (createdLike.post.id === post.id) {
+                        post.likes.items.push(createdLike)
+                    }
+                }
+                this.setState({ posts })
+            },
+        })
+
+        this.deletePostLikeListener = API.graphql(graphqlOperation(onDeleteLike)).subscribe({
+            next: (postData) => {
+                console.log(postData)
+            },
+        })
     }
 
     getPosts = async () => {
-        const result = await API.graphql({
+        const results = await API.graphql({
             query: queries.listPosts,
         })
-
-        this.setState({ posts: result.data.listPosts.items.reverse() })
+        const sortedReslts = results.data.listPosts.items
+        this.setState({ posts: sortedReslts })
     }
 
     componentWillUnmount() {
@@ -121,6 +156,9 @@ export default class FeedContainer extends Component {
         this.updatePostListener.unsubscribe()
         this.createPostCommentListener.unsubscribe()
         this.updatePostCommentListener.unsubscribe()
+        this.deletePostCommentListener.unsubscribe()
+        this.createPostLikeListener.unsubscribe()
+        this.deletePostLikeListener.unsubscribe()
     }
 
     render() {

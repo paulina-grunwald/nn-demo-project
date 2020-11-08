@@ -8,20 +8,56 @@ import { Popover } from 'antd'
 import { EllipsisOutlined, HeartFilled } from '@ant-design/icons'
 import Comments from '../CommentEditor/Comments'
 import UserContext from '../UserContext'
-import { updatePost } from '../../graphql/mutations'
+import { updatePost, createLike, deleteLike } from '../../graphql/mutations'
 class Post extends Component {
+    static contextType = UserContext
     state = {
         isEditing: false,
         postTitle: '',
         postBody: '',
+        isliked: false,
+        userLikeId: '',
     }
 
     componentDidMount = () => {
         const { post } = this.props
+        const { userId } = this.context
+        const loggedInUserLike = post.likes.items.filter((like) => like.likeOwnerId === userId)
+        let isLiked = loggedInUserLike.length >= 1 ? true : false
+        let likeId = loggedInUserLike.length >= 1 ? loggedInUserLike[0].id : false
+
         this.setState({
             postTitle: post.postTitle,
             postBody: post.postBody,
+            isliked: isLiked,
+            userLikeId: this.getLikeId(post),
+            likeId: likeId,
         })
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.post !== this.props.post) {
+            const { userId } = this.context
+            const { post } = this.props
+            const loggedInUserLike = post.likes.items.filter((like) => like.likeOwnerId === userId)
+            let isLiked = loggedInUserLike.length >= 1 ? true : false
+            this.setState({
+                postTitle: post.postTitle,
+                postBody: post.postBody,
+                isliked: isLiked,
+                // likeId: loggedInUserLike[0].id
+                userLikeId: this.getLikeId(post),
+            })
+        }
+    }
+
+    getLikeId = (post) => {
+        const { userId } = this.context
+        const loggedInUserLike = post.likes.items.filter((like) => like.likeOwnerId === userId)
+        if (loggedInUserLike.length > 0) {
+            const likeId = loggedInUserLike[0].id
+            return likeId
+        }
     }
 
     handleDeletePost = async (postId) => {
@@ -65,8 +101,42 @@ class Post extends Component {
         this.setState({ postBody: event.target.value })
     }
 
+    handleLike = async () => {
+        const { post } = this.props
+        const { userId, username } = this.context
+
+        if (this.state.isliked) {
+            this.handleDeleteLike()
+        } else {
+            const input = {
+                numberLikes: 1,
+                likeOwnerId: userId,
+                likeOwnerUsername: username,
+                likePostId: post.id,
+            }
+
+            await API.graphql(graphqlOperation(createLike, { input }))
+        }
+    }
+
+    likePost = () => {
+        this.setState({ isliked: true })
+        this.handleLike()
+    }
+
+    handleDeleteLike = async () => {
+        const { likeId } = this.state
+        const input = {
+            id: likeId,
+        }
+        this.setState({
+            isliked: false,
+        })
+        await API.graphql(graphqlOperation(deleteLike, { input }))
+    }
+
     render() {
-        const { isEditing } = this.state
+        const { isEditing, isliked } = this.state
         const { post } = this.props
         const comments = post.comments.items
         const content = (
@@ -101,7 +171,7 @@ class Post extends Component {
                                     <div className="Post__header-userinfo">
                                         <div className="Post__header-avatar"></div>
                                         <div className="Post__header-info">
-                                            <div>{username} shared a post</div>
+                                            <div>{post.postOwnerUsername} shared a post</div>
                                             <time> {new Date(post.createdAt).toDateString()}</time>
                                         </div>
                                     </div>
@@ -155,7 +225,7 @@ class Post extends Component {
                                         </form>
                                         <div className="Post__wrapper">
                                             <HeartFilled />
-                                            <span>10</span>
+                                            <span>{post.likes.items.length}</span>
                                             {comments.length > 0 && (
                                                 <Comments postId={post.id} comments={comments} />
                                             )}
@@ -166,8 +236,15 @@ class Post extends Component {
                                         <div className="Post__title">{post.postTitle}</div>
                                         <div className="Post__body">{post.postBody}</div>
                                         <div>
-                                            <HeartFilled />
-                                            <span>10</span>
+                                            <HeartFilled
+                                                className={
+                                                    isliked
+                                                        ? 'like-button like-button--liked'
+                                                        : 'like-button'
+                                                }
+                                                onClick={() => this.likePost()}
+                                            />
+                                            <span>{post.likes.items.length}</span>
                                         </div>
                                         {comments.length > 0 && <Comments comments={comments} />}
                                     </div>

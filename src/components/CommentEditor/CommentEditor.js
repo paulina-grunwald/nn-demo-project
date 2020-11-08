@@ -9,8 +9,6 @@ export default class CommentEditor extends Component {
         content: '',
     }
 
-    componentDidMount = () => {}
-
     handleChangeContent = (event) => this.setState({ content: event.target.value })
 
     handleAddComment = async (event) => {
@@ -51,9 +49,9 @@ export default class CommentEditor extends Component {
 }
 
 CommentEditor.propTypes = {
+    context: PropTypes.object,
     postId: PropTypes.string,
     username: PropTypes.string,
-    context: PropTypes.object,
 }
 
 CommentEditor.contextType = UserContext
