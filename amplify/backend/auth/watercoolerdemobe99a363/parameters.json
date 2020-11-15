@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "nndemoprojected619a86_identitypool_ed619a86",
+    "identityPoolName": "watercoolerdemobe99a363_identitypool_be99a363",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "nndemoed619a86",
-    "userPoolName": "nndemoprojected619a86_userpool_ed619a86",
+    "resourceNameTruncated": "watercbe99a363",
+    "userPoolName": "watercoolerdemobe99a363_userpool_be99a363",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "nndemoed619a86_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "watercbe99a363_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "ed619a86",
-    "resourceName": "nndemoprojected619a86",
+    "sharedId": "be99a363",
+    "resourceName": "watercoolerdemobe99a363",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

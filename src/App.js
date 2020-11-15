@@ -15,7 +15,7 @@ function App() {
             <Main />
             {/* <FeedContainer /> */}
             <Footer style={{ textAlign: 'center', marginTop: '200px' }}>
-                Ant Design ©2018 Created by Ant UED
+                ©2020 Created by #WaterCooler
             </Footer>
         </div>
     )

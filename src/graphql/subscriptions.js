@@ -32,7 +32,7 @@ export const onCreatePost = /* GraphQL */ `
         }
         nextToken
       }
-      image
+      photo
       updatedAt
     }
   }
@@ -68,7 +68,7 @@ export const onUpdatePost = /* GraphQL */ `
         }
         nextToken
       }
-      image
+      photo
       updatedAt
     }
   }
@@ -104,7 +104,7 @@ export const onDeletePost = /* GraphQL */ `
         }
         nextToken
       }
-      image
+      photo
       updatedAt
     }
   }
@@ -128,7 +128,7 @@ export const onCreateComment = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       content
@@ -167,7 +167,7 @@ export const onUpdateComment = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       content
@@ -206,7 +206,7 @@ export const onDeleteComment = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       content
@@ -246,7 +246,7 @@ export const onCreateLike = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       createdAt
@@ -274,7 +274,7 @@ export const onUpdateLike = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       createdAt
@@ -302,7 +302,7 @@ export const onDeleteLike = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       createdAt
@@ -328,7 +328,7 @@ export const onCreateCommentLike = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
+          photo
           updatedAt
         }
         content
@@ -361,7 +361,7 @@ export const onUpdateCommentLike = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
+          photo
           updatedAt
         }
         content
@@ -394,7 +394,7 @@ export const onDeleteCommentLike = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
+          photo
           updatedAt
         }
         content
@@ -404,6 +404,48 @@ export const onDeleteCommentLike = /* GraphQL */ `
         }
         updatedAt
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      name
+      bio
+      picture
+      email
+      phoneNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      name
+      bio
+      picture
+      email
+      phoneNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      name
+      bio
+      picture
+      email
+      phoneNumber
       createdAt
       updatedAt
     }

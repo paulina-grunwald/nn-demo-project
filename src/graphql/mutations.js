@@ -35,7 +35,7 @@ export const createPost = /* GraphQL */ `
         }
         nextToken
       }
-      image
+      photo
       updatedAt
     }
   }
@@ -74,7 +74,7 @@ export const updatePost = /* GraphQL */ `
         }
         nextToken
       }
-      image
+      photo
       updatedAt
     }
   }
@@ -113,7 +113,7 @@ export const deletePost = /* GraphQL */ `
         }
         nextToken
       }
-      image
+      photo
       updatedAt
     }
   }
@@ -140,7 +140,7 @@ export const createComment = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       content
@@ -182,7 +182,7 @@ export const updateComment = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       content
@@ -224,7 +224,7 @@ export const deleteComment = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       content
@@ -267,7 +267,7 @@ export const createLike = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       createdAt
@@ -298,7 +298,7 @@ export const updateLike = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       createdAt
@@ -329,7 +329,7 @@ export const deleteLike = /* GraphQL */ `
         likes {
           nextToken
         }
-        image
+        photo
         updatedAt
       }
       createdAt
@@ -358,7 +358,7 @@ export const createCommentLike = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
+          photo
           updatedAt
         }
         content
@@ -394,7 +394,7 @@ export const updateCommentLike = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
+          photo
           updatedAt
         }
         content
@@ -430,7 +430,7 @@ export const deleteCommentLike = /* GraphQL */ `
           postTitle
           postBody
           createdAt
-          image
+          photo
           updatedAt
         }
         content
@@ -440,6 +440,57 @@ export const deleteCommentLike = /* GraphQL */ `
         }
         updatedAt
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      name
+      bio
+      picture
+      email
+      phoneNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      name
+      bio
+      picture
+      email
+      phoneNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      name
+      bio
+      picture
+      email
+      phoneNumber
       createdAt
       updatedAt
     }

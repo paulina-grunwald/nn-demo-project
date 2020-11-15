@@ -10,11 +10,6 @@ type Post @model {
   photo: String
 }
 
-# type Photo @model {
-#   id: ID!
-#   owner: String
-#   file: S3Object
-# }
 type Comment @model {
 	id: ID!
 	commentOwnerId: String!
@@ -40,8 +35,12 @@ type CommentLike @model {
 	likeOwnerUsername: String!
 	post: Comment @connection(name: "CommentLikes")
 }
-type S3Object {
-  bucket: String!
-  region: String!
-  key: String!
+
+type User @model {
+  id: ID!
+  name: String!
+  bio: String
+  picture: String
+  email: String!
+  phoneNumber: String!
 }
